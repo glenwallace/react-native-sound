@@ -1,27 +1,41 @@
 {
-  "name": "react-native-sound",
-  "version": "0.11.2",
-  "description": "React Native module for playing sound clips on iOS, Android, and Windows",
-  "main": "sound.js",
-  "typings": "index.d.ts",
-  "repository": "zmxv/react-native-sound",
-  "keywords": [
-    "react-native",
-    "sound",
-    "audio",
-    "ios",
-    "android",
-    "windows"
+  "_args": [
+    [
+      "react-native-sound@0.11.2",
+      "/Users/fujisan/Documents/wk/ba/hsxs/xianshen"
+    ]
   ],
-  "author": "Zhen Wang <z@zmxv.com> (http://blog.zmxv.com)",
-  "license": "MIT",
-  "peerDependencies": {
-    "react-native": ">=0.8.0"
+  "_from": "react-native-sound@0.11.2",
+  "_id": "react-native-sound@0.11.2",
+  "_inBundle": false,
+  "_integrity": "sha512-LmGc8lgOK3qecYMVQpyHvww/C+wgT6sWeMpVbOe4NCRGC2yKd4fo4U0KBUo9PO7AqKESO3I/2GZg1/C0+bwiiA==",
+  "_location": "/react-native-sound",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-sound@0.11.2",
+    "name": "react-native-sound",
+    "escapedName": "react-native-sound",
+    "rawSpec": "0.11.2",
+    "saveSpec": null,
+    "fetchSpec": "0.11.2"
   },
-  "scripts": {
-    "clang-format": "node scripts/clang-format.js",
-    "clang-format:check": "node scripts/clang-format.js --check"
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-sound/-/react-native-sound-0.11.2.tgz",
+  "_spec": "0.11.2",
+  "_where": "/Users/fujisan/Documents/wk/ba/hsxs/xianshen",
+  "author": {
+    "name": "Zhen Wang",
+    "email": "z@zmxv.com",
+    "url": "http://blog.zmxv.com"
   },
+  "bugs": {
+    "url": "https://github.com/zmxv/react-native-sound/issues"
+  },
+  "description": "React Native module for playing sound clips on iOS, Android, and Windows",
   "devDependencies": {
     "glob": "^7.1.4",
     "promisify-child-process": "^3.1.1"
@@ -37,5 +51,30 @@
     "windows/RNSoundModule/**/*.@(sln|json|xml|csproj)",
     "windows/RNSoundModule/**/*.cs",
     "!scripts"
-  ]
+  ],
+  "homepage": "https://github.com/zmxv/react-native-sound#readme",
+  "keywords": [
+    "react-native",
+    "sound",
+    "audio",
+    "ios",
+    "android",
+    "windows"
+  ],
+  "license": "MIT",
+  "main": "sound.js",
+  "name": "react-native-sound",
+  "peerDependencies": {
+    "react-native": ">=0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmxv/react-native-sound.git"
+  },
+  "scripts": {
+    "clang-format": "node scripts/clang-format.js",
+    "clang-format:check": "node scripts/clang-format.js --check"
+  },
+  "typings": "index.d.ts",
+  "version": "0.11.2"
 }

@@ -23,6 +23,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.util.Log;
 
@@ -34,6 +36,8 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
   Boolean mixWithOthers = true;
   Double focusedPlayerKey;
   Boolean wasPlayingBeforeFocusChange = false;
+  double limitSeconds = 0;
+  Timer timer;
 
   public RNSoundModule(ReactApplicationContext context) {
     super(context);
@@ -222,7 +226,8 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
   }
 
   @ReactMethod
-  public void play(final Double key, final Callback callback) {
+  public void play(final Double limitSec, final Double key, final Callback callback) {
+    this.limitSeconds = limitSec;
     MediaPlayer player = this.playerPool.get(key);
     if (player == null) {
       setOnPlay(false, key);
@@ -279,6 +284,28 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
     });
     player.start();
     setOnPlay(true, key);
+
+    if(this.timer != null){
+      this.timer.cancel();
+    }
+    if(this.limitSeconds > 0){
+      this.timer = new Timer();
+      this.timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          if (player != null && player.isPlaying()) {
+            double seconds = player.getCurrentPosition() * .001;
+            if(seconds >= limitSeconds){
+              player.pause();
+              if (callback != null) {
+                callback.invoke("limit");
+              }
+              timer.cancel();
+            }
+          }
+        }
+      }, 0, 1000);
+    }
   }
 
   @ReactMethod
@@ -320,6 +347,9 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
 
   @ReactMethod
   public void release(final Double key) {
+    if(this.timer != null){
+      this.timer.cancel();
+    }
     MediaPlayer player = this.playerPool.get(key);
     if (player != null) {
       player.reset();
@@ -465,7 +495,7 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
             }
         } else {
             if (this.wasPlayingBeforeFocusChange) {
-              this.play(this.focusedPlayerKey, null);
+              this.play(this.limitSeconds, this.focusedPlayerKey, null);
               this.wasPlayingBeforeFocusChange = false;
             }
         }

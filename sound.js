@@ -104,9 +104,9 @@ Sound.prototype.isLoaded = function() {
   return this._loaded;
 };
 
-Sound.prototype.play = function(onEnd) {
+Sound.prototype.play = function(limitSecond, onEnd) {
   if (this._loaded) {
-    RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
+    RNSound.play(limitSecond, this._key, (successfully) => onEnd && onEnd(successfully));
   } else {
     onEnd && onEnd(false);
   }
@@ -262,6 +262,12 @@ Sound.prototype.setPitch = function(value) {
 Sound.prototype.getCurrentTime = function(callback) {
   if (this._loaded) {
     RNSound.getCurrentTime(this._key, callback);
+  }
+};
+
+Sound.prototype.getCurrentDuration = function(callback) {
+  if (this._loaded) {
+    RNSound.getCurrentDuration(this._key, callback);
   }
 };
 
